@@ -19,7 +19,7 @@ demo-image:
 	docker pull jupyter/demo
 
 proxy-image:
-	docker pull jupyter/configurable-http-proxy
+	docker pull jupyterhub/configurable-http-proxy
 
 network:
 	@docker network inspect $(DOCKER_NETWORK_NAME) >/dev/null 2>&1 || docker network create $(DOCKER_NETWORK_NAME)
@@ -30,7 +30,7 @@ proxy: proxy-image network
 		-p 8000:8000 \
 		-p 8001:8001 \
 		--name proxy \
-		jupyter/configurable-http-proxy \
+		jupyterhub/configurable-http-proxy \
 		--default-target http://tmpnb:9999 --api-ip 0.0.0.0
 
 tmpnb: minimal-image tmpnb-image network
